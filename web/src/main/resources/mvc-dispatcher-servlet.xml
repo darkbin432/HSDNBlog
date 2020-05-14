@@ -1,0 +1,56 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.hznu.lwb"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.hznu.lwb.utils.JsonObjectMapper">
+                        <property name="timeZone" value="GMT+8"/>
+                        <!--                     <property name="serializationInclusion"> -->
+                        <!--                         <value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value> -->
+                        <!--                     </property> -->
+                    </bean>
+                    
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!--<mvc:interceptors>-->
+    <!--<mvc:interceptor>-->
+    <!--<mvc:mapping path="/**" />-->
+    <!--<mvc:exclude-mapping path="/login**"/>-->
+    <!--<mvc:exclude-mapping path="/api/**"/>-->
+    <!--<mvc:exclude-mapping path="/resources/**"/>-->
+    <!--&lt;!&ndash;<bean class="com.hznu.pay.interceptor.AuthInterceptor"></bean>&ndash;&gt;-->
+    <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+</beans>

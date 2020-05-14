@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/index" />
+		<property name="unauthorizedUrl" value="/unauth" />
+		<!-- <property name="filters"> -->
+		<!-- <util:map> -->
+		<!-- <entry key="authc" value-ref="formAuthenticationFilter" /> -->
+		<!-- </util:map> -->
+		<!-- </property> -->
+		<property name="filterChainDefinitions">
+			<value>
+				/logout=anon
+				/doctor/**=anon
+				/api/**=anon
+				/m/**=anon
+				/pay/**=anon
+				/wap/article/**=anon
+				/druid/**=anon
+				/UploadRoot/**=anon
+				/manage/**=authc
+				/remote/**=anon
+				/resources/**=anon
+				/favicon.ico=anon
+				/unauth=anon
+				/test/**=anon
+				/getCurrentUser=anon
+				<!--/**=authc-->
+			</value>
+			<!-- 之前的写法： /login.do=authc /logout=anon /static/**=anon /favicon.ico=anon 
+				/Kaptcha.jpg=anon /unauth.do=anon /**=imUser -->
+		</property>
+	</bean>
+
+	<bean id="myShiroRealm" class="com.hznu.lwb.shiro.UserRealm">
+		<!--验证方式 -->
+		<property name="credentialsMatcher">
+			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="MD5" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+	<!-- 权限管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 数据库认证的实现 org.springrain.frame.shiro.ShiroDbRealm -->
+		<property name="realm" ref="myShiroRealm" />
+		<!-- session 管理器 -->
+		<!--<property name="sessionManager" ref="sessionManager" />-->
+		<!-- 缓存管理器 -->
+		<property name="cacheManager" ref="shiroCacheManager" />
+	</bean>
+
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="globalSessionTimeout" value="288000000" />
+		<property name="deleteInvalidSessions" value="true" />
+<!-- 		<property name="sessionValidationSchedulerEnabled" value="true" /> -->
+<!-- 		<property name="sessionDAO" ref="sessionDAO" /> -->
+<!-- 		<property name="sessionIdCookieEnabled" value="true" /> -->
+<!-- 		<property name="sessionIdCookie" ref="sessionIdCookie" /> -->
+	</bean>
+
+
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+</beans>
