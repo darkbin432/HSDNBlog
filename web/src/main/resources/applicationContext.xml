@@ -39,19 +39,5 @@
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.qq.com"/>
-        <property name="port" value="465"/>
-        <property name="username" value="1015817997@qq.com"/>
-        <property name="password" value="kxifdrfofucvbbdi"/>
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.ssl.enable">true</prop>
-            </props>
-        </property>
-    </bean>
-
 
 </beans>

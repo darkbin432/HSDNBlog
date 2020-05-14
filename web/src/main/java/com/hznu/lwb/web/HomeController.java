@@ -24,12 +24,7 @@ public class HomeController extends ApplicationController {
 
     @RequestMapping({"/"})
     public ModelAndView index() {
-        return buildMAV("default.jsp");
-    }
-
-    @RequestMapping({"/general"})
-    public ModelAndView general() {
-        return buildMAV("general.jsp");
+        return buildMAV("index.jsp");
     }
 
     @RequestMapping(value = "/login")

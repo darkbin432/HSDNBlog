@@ -1,6 +1,8 @@
 package com.hznu.lwb.service.impl;
 
+import com.hznu.lwb.model.User;
 import com.hznu.lwb.model.result.ApiResult;
+import com.hznu.lwb.persistence.UserDao;
 import com.hznu.lwb.service.IUserService;
 import org.springframework.stereotype.Service;
 

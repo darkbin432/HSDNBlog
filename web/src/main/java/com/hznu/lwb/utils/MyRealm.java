@@ -1,5 +1,7 @@
 package com.hznu.lwb.utils;
 
+import com.hznu.lwb.model.User;
+import com.hznu.lwb.persistence.UserDao;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

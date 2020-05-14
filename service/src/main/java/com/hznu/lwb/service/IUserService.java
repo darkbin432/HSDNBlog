@@ -1,5 +1,6 @@
 package com.hznu.lwb.service;
 
+import com.hznu.lwb.model.User;
 import com.hznu.lwb.model.result.ApiResult;
 
 /**

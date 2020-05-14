@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hznu.lwb.persistence.UserDao">
+
+	<!--<insert id="insert" parameterType="com.hznu.lwb.model.User" useGeneratedKeys="true" keyProperty="id">-->
+		<!--insert into user(code,name,password,created_at,updated_at)-->
+		<!--values(#{code},#{name},#{password},now(),now())-->
+	<!--</insert>-->
+
+	<select id="getUser" parameterType="String" resultType="com.hznu.lwb.model.User">
+		select * from user
+		where status = 1 and username = #{username}
+		limit  1;
+	</select>
+
+	<!--<update id="updateInfo" parameterType="com.hznu.lwb.model.User" >-->
+		<!--update user-->
+		<!--<set>-->
+			<!--<if test="mobile != null">-->
+				<!--mobile = #{mobile},-->
+			<!--</if>-->
+			<!--<if test="telephone != null">-->
+				<!--telephone = #{telephone},-->
+			<!--</if>-->
+			<!--position = #{position}-->
+		<!--</set>-->
+		<!--where username = #{username};-->
+	<!--</update>-->
+
+	<update id="updatePassword" parameterType="com.hznu.lwb.model.User" >
+		update user
+		set password = #{password},
+		updated_time = now()
+		where username = #{username};
+	</update>
+
+	<select id="getMaxId" resultType="int">
+		select max(id) from user
+	</select>
+
+	<select id="login" parameterType="String" resultType="com.hznu.lwb.model.User">
+		select * from user
+		where username = #{username}
+		limit 1;
+	</select>
+
+</mapper>

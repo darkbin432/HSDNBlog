@@ -1,5 +1,7 @@
 package com.hznu.lwb.shiro;
 
+import com.hznu.lwb.model.User;
+import com.hznu.lwb.persistence.UserDao;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -53,7 +55,7 @@ public class UserRealm extends AuthorizingRealm {
 
 		return authorizationInfo;
 	}
-	
+
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
@@ -66,11 +68,11 @@ public class UserRealm extends AuthorizingRealm {
 		if(StringUtils.isNotBlank(username) && password != null){
 			user = userDao.login(username);
 		}
-		
+
 		if (user == null) {
 			 throw new UnknownAccountException("账号密码错误");//没找到帐号
 		}
-		
+
 		return new SimpleAuthenticationInfo(user, user.getPassword(), user.getUsername());
 	}
 
