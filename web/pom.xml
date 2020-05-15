@@ -222,8 +222,8 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <server>tomcat</server>
-                    <username>august</username>
-                    <password>augustzou</password>
+                    <username>darkbin</username>
+                    <password>darkbin</password>
                     <path>/${final-name}</path>
                 </configuration>
             </plugin>
