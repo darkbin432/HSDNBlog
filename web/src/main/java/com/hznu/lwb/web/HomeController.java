@@ -48,7 +48,7 @@ public class HomeController extends ApplicationController {
         return buildMAV("login.jsp");
     }
 
-    @RequestMapping(value = "/manage/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         currentSubjectLogout();
         return "redirect:/login";

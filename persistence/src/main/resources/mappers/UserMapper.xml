@@ -1,47 +1,117 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hznu.lwb.persistence.UserDao">
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select *
+    from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hznu.lwb.model.User">
+    insert into user (user_id, password, type, 
+      sex, phone_number, nickname, 
+      score)
+    values (#{userId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, 
+      #{sex,jdbcType=INTEGER}, #{phoneNumber,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hznu.lwb.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hznu.lwb.model.User">
+    update user
+    <set>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hznu.lwb.model.User">
+    update user
+    set password = #{password,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIT},
+      sex = #{sex,jdbcType=INTEGER},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
 
-	<!--<insert id="insert" parameterType="com.hznu.lwb.model.User" useGeneratedKeys="true" keyProperty="id">-->
-		<!--insert into user(code,name,password,created_at,updated_at)-->
-		<!--values(#{code},#{name},#{password},now(),now())-->
-	<!--</insert>-->
-
-	<select id="getUser" parameterType="String" resultType="com.hznu.lwb.model.User">
-		select * from user
-		where status = 1 and username = #{username}
-		limit  1;
-	</select>
-
-	<!--<update id="updateInfo" parameterType="com.hznu.lwb.model.User" >-->
-		<!--update user-->
-		<!--<set>-->
-			<!--<if test="mobile != null">-->
-				<!--mobile = #{mobile},-->
-			<!--</if>-->
-			<!--<if test="telephone != null">-->
-				<!--telephone = #{telephone},-->
-			<!--</if>-->
-			<!--position = #{position}-->
-		<!--</set>-->
-		<!--where username = #{username};-->
-	<!--</update>-->
-
-	<update id="updatePassword" parameterType="com.hznu.lwb.model.User" >
-		update user
-		set password = #{password},
-		updated_time = now()
-		where username = #{username};
-	</update>
-
-	<select id="getMaxId" resultType="int">
+  <select id="getMaxId" resultType="int">
 		select max(id) from user
-	</select>
+  </select>
 
-	<select id="login" parameterType="String" resultType="com.hznu.lwb.model.User">
+  <select id="login" parameterType="String" resultType="com.hznu.lwb.model.User">
 		select * from user
-		where username = #{username}
+		where userId = #{userId}
 		limit 1;
-	</select>
+  </select>
+
 
 </mapper>

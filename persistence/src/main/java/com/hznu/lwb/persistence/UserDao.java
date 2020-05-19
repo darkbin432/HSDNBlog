@@ -1,26 +1,22 @@
 package com.hznu.lwb.persistence;
 
+import java.util.List;
+
 import com.hznu.lwb.model.User;
 
-/**
- * UserDao
- *
- * @author xuzou
- * @date 8/5/16
- * @copyright: copyright @ hznuTech 2016
- */
 public interface UserDao {
-    int insert(User model);
 
-    int getMaxId();
+    Integer deleteByPrimaryKey(String userId);
 
-    User getUser(String username);
+    Integer insert(User record);
 
-    void updateInfo(User user);
+    Integer insertSelective(User record);
 
-    void updatePassword(String username, String password);
+    User selectByPrimaryKey(String userId);
 
-    User login(String username);
+    Integer updateByPrimaryKeySelective(User record);
 
-//    User findOne(HashMap<String, Object> search);
+    Integer updateByPrimaryKey(User record);
+
+    User login(String userId);
 }

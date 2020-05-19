@@ -16,5 +16,5 @@ public interface IUserService {
 
     ApiResult updatePersonalInfo(User user);
 
-    ApiResult getUser(String username);
+    ApiResult getUser(String userId);
 }

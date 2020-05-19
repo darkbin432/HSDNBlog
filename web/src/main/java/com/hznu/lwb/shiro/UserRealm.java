@@ -73,7 +73,7 @@ public class UserRealm extends AuthorizingRealm {
 			 throw new UnknownAccountException("账号密码错误");//没找到帐号
 		}
 
-		return new SimpleAuthenticationInfo(user, user.getPassword(), user.getUsername());
+		return new SimpleAuthenticationInfo(user, user.getPassword(), user.getUserId());
 	}
 
 	private static final String OR_OPERATOR = " or ";

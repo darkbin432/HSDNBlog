@@ -35,14 +35,14 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         Object principal = authenticationToken.getPrincipal();
-        User user = userDao.getUser((String)principal);
+        User user = userDao.selectByPrimaryKey((String)principal);
         if(user!=null){
             password=user.getPassword();
         }else{
             return null;
         }
         String credentials = password;
-        String salt=user.getUsername();
+        String salt=user.getUserId();
         ByteSource credentialsSalt = new Md5Hash(salt);
         String realmName = getName();
         SimpleAuthenticationInfo info =

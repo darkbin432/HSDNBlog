@@ -25,7 +25,7 @@ public class UserService implements IUserService {
     public ApiResult login(User user) {
         ApiResult apiResult = new ApiResult();
         try {
-            User temp = userDao.getUser(user.getUsername());
+            User temp = userDao.selectByPrimaryKey(user.getUserId());
             if (temp != null) {
                 temp.setPassword("***********");
                 apiResult.success(temp);
@@ -65,10 +65,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ApiResult getUser(String username) {
+    public ApiResult getUser(String userId) {
         ApiResult apiResult = new ApiResult();
         try {
-            apiResult.success(userDao.getUser(username));
+            apiResult.success(userDao.selectByPrimaryKey(userId));
         }catch (Exception e){
             apiResult.fail();
         }

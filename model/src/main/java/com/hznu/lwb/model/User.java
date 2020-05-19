@@ -1,44 +1,54 @@
 package com.hznu.lwb.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
  */
-public class User extends Entity{
-
+public class User implements Serializable {
     /**
-     * 用户名
+     * 用户ID
      */
-    private String username;
+    private String userId;
 
     /**
-     * 密码
+     * 用户的密码
      */
     private String password;
 
     /**
-     * 用户权限类别
+     * 用户类型 0普通用户 1管理员
      */
-    private Integer type;
+    private Boolean type;
+
+    /**
+     * 性别
+     */
+    private Integer sex;
 
     /**
      * 手机号码
      */
-    private String phone;
+    private String phoneNumber;
 
     /**
-     * 姓名
+     * 昵称
      */
-    private String name;
+    private String nickname;
 
-    public String getUsername() {
-        return username;
+    /**
+     * 积分
+     */
+    private Integer score;
+
+    private static final long serialVersionUID = 1L;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {
@@ -49,27 +59,43 @@ public class User extends Entity{
         this.password = password;
     }
 
-    public Integer getType() {
+    public Boolean getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(Boolean type) {
         this.type = type;
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
-    public String getName() {
-        return name;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }
