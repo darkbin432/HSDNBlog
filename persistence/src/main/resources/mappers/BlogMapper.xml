@@ -10,12 +10,12 @@
   </select>
 
   <select id="selectByCondition" parameterType="com.hznu.lwb.model.param.BlogParam" resultType="com.hznu.lwb.model.Blog">
-    select *
-    from blog
+    select blog.user_id, user.nickname as userName
+    from user left join blog on user.user_id = blog.user_id
     <where>
       1 = 1
       <if test="userId != null">
-        and user_id = #{userId}
+        and blog.user_id = #{userId}
       </if>
       <if test="title != null">
         and title like concat('%',#{title},'%')
@@ -24,6 +24,7 @@
         and content = like concat('%',#{content},'%')
       </if>
     </where>
+    order by time desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

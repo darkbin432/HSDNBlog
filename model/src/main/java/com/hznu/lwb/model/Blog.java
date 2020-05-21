@@ -22,6 +22,8 @@ public class Blog implements Serializable {
      */
     private String userId;
 
+    private String userName;
+
     /**
      * 博文的发表时间
      */
@@ -61,6 +63,14 @@ public class Blog implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Date getTime() {
