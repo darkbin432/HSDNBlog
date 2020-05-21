@@ -10,8 +10,8 @@
   </select>
 
   <select id="selectByCondition" parameterType="com.hznu.lwb.model.param.BlogParam" resultType="com.hznu.lwb.model.Blog">
-    select blog.user_id, user.nickname as userName
-    from user left join blog on user.user_id = blog.user_id
+    select blog.*, user.nickname as userName
+    from blog left join user on user.user_id = blog.user_id
     <where>
       1 = 1
       <if test="userId != null">
