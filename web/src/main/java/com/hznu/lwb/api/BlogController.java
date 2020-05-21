@@ -1,6 +1,7 @@
 package com.hznu.lwb.api;
 
 import com.hznu.lwb.model.Blog;
+import com.hznu.lwb.model.PraiseKey;
 import com.hznu.lwb.model.param.BlogParam;
 import com.hznu.lwb.model.result.ApiResult;
 import com.hznu.lwb.service.IBlogService;
@@ -53,6 +54,27 @@ public class BlogController {
     @ResponseBody
     public ApiResult selectBlogByCondition(BlogParam blogParam){
         ApiResult apiResult = blogService.selectByCondition(blogParam);
+        return apiResult;
+    }
+
+    @RequestMapping(value = "/insertPraise",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult insertPraise(PraiseKey praiseKey){
+        ApiResult apiResult = blogService.insertPraise(praiseKey);
+        return apiResult;
+    }
+
+    @RequestMapping(value = "/deletePraise",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ApiResult deletePraise(PraiseKey praiseKey){
+        ApiResult apiResult = blogService.deletePraise(praiseKey);
+        return apiResult;
+    }
+
+    @RequestMapping(value = "/countPraise",method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResult countPraise(Integer blogId){
+        ApiResult apiResult = blogService.countPraise(blogId);
         return apiResult;
     }
 }

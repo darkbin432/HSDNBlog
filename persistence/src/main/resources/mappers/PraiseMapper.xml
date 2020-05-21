@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hznu.lwb.persistence.PraiseDao">
+
+  <delete id="deleteByPrimaryKey" parameterType="com.hznu.lwb.model.PraiseKey">
+    delete from praise
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.hznu.lwb.model.PraiseKey">
+    insert into praise (user_id, blog_id)
+    values (#{userId,jdbcType=VARCHAR}, #{blogId,jdbcType=INTEGER})
+  </insert>
+
+  <select id="count" parameterType="Integer" resultType="Integer">
+    select count(*)
+    from praise
+    where blog_id = #{blogId}
+  </select>
+</mapper>
