@@ -24,6 +24,7 @@
 
 	<mappers>
 		<mapper resource="mappers/UserMapper.xml"/>
+		<mapper resource="mappers/BlogMapper.xml"/>
 	</mappers>
 
 
