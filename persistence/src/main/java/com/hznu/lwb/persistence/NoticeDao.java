@@ -1,6 +1,7 @@
 package com.hznu.lwb.persistence;
 
 import com.hznu.lwb.model.Notice;
+import com.hznu.lwb.model.UserViewNoticeKey;
 
 import java.util.List;
 
@@ -10,11 +11,13 @@ public interface NoticeDao {
 
     Integer insert(Notice record);
 
-    Integer insertSelective(Notice record);
+    Integer insertRelation(UserViewNoticeKey userViewNoticeKey);
 
     Notice selectByPrimaryKey(Integer noticeId);
 
     Integer updateByPrimaryKeySelective(Notice record);
 
-    Integer updateByPrimaryKey(Notice record);
+    List<Notice> selectByAdmin(String userId);
+
+    List<Notice> selectByUser(String userId);
 }

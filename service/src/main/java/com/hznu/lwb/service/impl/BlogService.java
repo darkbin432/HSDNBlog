@@ -109,7 +109,8 @@ public class BlogService implements IBlogService {
     public ApiResult countPraise(Integer blogId) {
         ApiResult apiResult = new ApiResult();
         try {
-            apiResult.success(praiseDao.count(blogId));
+            apiResult.setData(praiseDao.count(blogId));
+            apiResult.success();
         }catch(Exception e){
             apiResult.fail("获取点赞数失败");
         }

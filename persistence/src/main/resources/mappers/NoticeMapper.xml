@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hznu.lwb.persistence.NoticeDao">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.hznu.lwb.model.Notice">
+    select *
+    from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectByAdmin" parameterType="string" resultType="com.hznu.lwb.model.Notice">
+        select *
+        from notice
+        where user_id = #{userId}
+        order by time desc
+    </select>
+
+    <select id="selectByUser" parameterType="string" resultType="com.hznu.lwb.model.Notice">
+        select notice.*
+        from user_view_notice uvn left join notice on uvn.notice_id = notice.notice_id
+        where uvn.user_id = #{userId}
+        order by notice.time desc
+    </select>
+    
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </delete>
+    
+  <insert id="insert" parameterType="com.hznu.lwb.model.Notice">
+    insert into notice (content, user_id,
+      time)
+    values (#{content,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      now())
+  </insert>
+
+  <insert id="insertRelation" parameterType="com.hznu.lwb.model.UserViewNoticeKey">
+    insert into user_view_notice (user_id, notice_id)
+    values (#{userId,jdbcType=VARCHAR}, #{noticeId,jdbcType=INTEGER})
+  </insert>
+    
+  <update id="updateByPrimaryKeySelective" parameterType="com.hznu.lwb.model.Notice">
+    update notice
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      time = now()
+    </set>
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

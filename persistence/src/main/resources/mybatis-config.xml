@@ -29,6 +29,7 @@
 		<mapper resource="mappers/FollowMapper.xml"/>
 		<mapper resource="mappers/LetterMapper.xml"/>
 		<mapper resource="mappers/PraiseMapper.xml"/>
+		<mapper resource="mappers/NoticeMapper.xml"/>
 	</mappers>
 
 
