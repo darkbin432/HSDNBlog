@@ -25,6 +25,9 @@
 	<mappers>
 		<mapper resource="mappers/UserMapper.xml"/>
 		<mapper resource="mappers/BlogMapper.xml"/>
+		<mapper resource="mappers/CommentMapper.xml"/>
+		<mapper resource="mappers/FollowMapper.xml"/>
+		<mapper resource="mappers/LetterMapper.xml"/>
 	</mappers>
 
 

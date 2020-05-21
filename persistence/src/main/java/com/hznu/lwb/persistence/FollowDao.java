@@ -2,11 +2,15 @@ package com.hznu.lwb.persistence;
 
 import com.hznu.lwb.model.FollowKey;
 
+import java.util.List;
+
 public interface FollowDao {
 
-    int deleteByPrimaryKey(FollowKey key);
+    Integer delete(FollowKey key);
 
-    int insert(FollowKey record);
+    Integer insert(FollowKey record);
 
-    int insertSelective(FollowKey record);
+    List<String> selectFollowers(String noticer);
+
+    List<String> selectNoticers(String follower);
 }

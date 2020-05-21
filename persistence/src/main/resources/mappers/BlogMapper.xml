@@ -18,10 +18,10 @@
         and user_id = #{userId}
       </if>
       <if test="title != null">
-        and title = #{title}
+        and title like concat('%',#{title},'%')
       </if>
       <if test="content != null">
-        and content = #{content}
+        and content = like concat('%',#{content},'%')
       </if>
     </where>
   </select>
@@ -32,56 +32,12 @@
   </delete>
 
   <insert id="insert" parameterType="com.hznu.lwb.model.Blog">
-    insert into blog (blog_id, content, user_id, 
+    insert into blog (content, user_id,
       time, title, type
       )
-    values (#{blogId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+    values ( #{content,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      now(), #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
       )
-  </insert>
-
-  <insert id="insertSelective" parameterType="com.hznu.lwb.model.Blog">
-    insert into blog
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="blogId != null">
-        blog_id,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="time != null">
-        time,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="blogId != null">
-        #{blogId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-    </trim>
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.hznu.lwb.model.Blog">
@@ -93,15 +49,13 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
-      </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+      time = now()
     </set>
     where blog_id = #{blogId,jdbcType=INTEGER}
   </update>

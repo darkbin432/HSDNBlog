@@ -6,10 +6,10 @@ import com.hznu.lwb.model.UserDownloadFileKey;
 
 public interface UserDownloadFileDao {
 
-    int deleteByPrimaryKey(UserDownloadFileKey key);
+    Integer deleteByPrimaryKey(UserDownloadFileKey key);
 
-    int insert(UserDownloadFileKey record);
+    Integer insert(UserDownloadFileKey record);
 
-    int insertSelective(UserDownloadFileKey record);
+    Integer insertSelective(UserDownloadFileKey record);
 
 }

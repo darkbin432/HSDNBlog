@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
+/**
+ * @author 斌
+ */
 @Controller
 @RequestMapping("/api")
 public class BlogController {
@@ -46,7 +49,7 @@ public class BlogController {
         return apiResult;
     }
 
-    @RequestMapping(value = "/selectBlogByCondition",method = RequestMethod.POST)
+    @RequestMapping(value = "/selectBlogByCondition",method = RequestMethod.GET)
     @ResponseBody
     public ApiResult selectBlogByCondition(BlogParam blogParam){
         ApiResult apiResult = blogService.selectByCondition(blogParam);

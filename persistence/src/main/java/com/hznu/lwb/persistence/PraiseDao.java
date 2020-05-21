@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface PraiseDao {
 
-    int deleteByPrimaryKey(PraiseKey key);
+    Integer deleteByPrimaryKey(PraiseKey key);
 
-    int insert(PraiseKey record);
+    Integer insert(PraiseKey record);
 
-    int insertSelective(PraiseKey record);
+    Integer insertSelective(PraiseKey record);
 }

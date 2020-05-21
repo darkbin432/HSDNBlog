@@ -1,7 +1,9 @@
 package com.hznu.lwb.service.impl;
 
+import com.hznu.lwb.model.FollowKey;
 import com.hznu.lwb.model.User;
 import com.hznu.lwb.model.result.ApiResult;
+import com.hznu.lwb.persistence.FollowDao;
 import com.hznu.lwb.persistence.UserDao;
 import com.hznu.lwb.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -9,17 +11,18 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+
 /**
- * UserService
- *
- * @author xuzou
- * @date 8/5/16
- * @copyright: copyright @ hznuTech 2016
+ * @author 斌
  */
 @Service
 public class UserService implements IUserService {
+
     @Resource
     UserDao userDao;
+
+    @Resource
+    FollowDao followDao;
 
     @Override
     public ApiResult login(User user) {
@@ -74,5 +77,53 @@ public class UserService implements IUserService {
         }
         return apiResult;
     }
+
+    @Override
+    public ApiResult insertFollow(FollowKey followKey) {
+        ApiResult apiResult = new ApiResult();
+        try {
+            followDao.insert(followKey);
+            apiResult.success();
+        }catch (Exception e){
+            apiResult.fail();
+        }
+        return apiResult;
+    }
+
+    @Override
+    public ApiResult deleteFollow(FollowKey followKey) {
+        ApiResult apiResult = new ApiResult();
+        try {
+            followDao.delete(followKey);
+            apiResult.success();
+        }catch (Exception e){
+            apiResult.fail();
+        }
+        return apiResult;
+    }
+
+    @Override
+    public ApiResult selectFollowers(String noticer) {
+        ApiResult apiResult = new ApiResult();
+        try {
+            apiResult.success(followDao.selectFollowers(noticer));
+        }catch (Exception e){
+            apiResult.fail();
+        }
+        return apiResult;
+    }
+
+    @Override
+    public ApiResult selectNoticers(String follower) {
+        ApiResult apiResult = new ApiResult();
+        try {
+            apiResult.success(followDao.selectNoticers(follower));
+        }catch (Exception e){
+            apiResult.fail();
+        }
+        return apiResult;
+    }
+
+
 }
 

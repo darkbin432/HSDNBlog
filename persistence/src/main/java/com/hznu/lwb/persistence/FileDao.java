@@ -4,15 +4,15 @@ import com.hznu.lwb.model.File;
 
 public interface FileDao {
 
-    int deleteByPrimaryKey(String filePath);
+    Integer deleteByPrimaryKey(String filePath);
 
-    int insert(File record);
+    Integer insert(File record);
 
-    int insertSelective(File record);
+    Integer insertSelective(File record);
 
     File selectByPrimaryKey(String filePath);
 
-    int updateByPrimaryKeySelective(File record);
+    Integer updateByPrimaryKeySelective(File record);
 
-    int updateByPrimaryKey(File record);
+    Integer updateByPrimaryKey(File record);
 }

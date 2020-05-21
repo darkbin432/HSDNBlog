@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface NoticeDao {
 
-    int deleteByPrimaryKey(Integer noticeId);
+    Integer deleteByPrimaryKey(Integer noticeId);
 
-    int insert(Notice record);
+    Integer insert(Notice record);
 
-    int insertSelective(Notice record);
+    Integer insertSelective(Notice record);
 
     Notice selectByPrimaryKey(Integer noticeId);
 
-    int updateByPrimaryKeySelective(Notice record);
+    Integer updateByPrimaryKeySelective(Notice record);
 
-    int updateByPrimaryKey(Notice record);
+    Integer updateByPrimaryKey(Notice record);
 }

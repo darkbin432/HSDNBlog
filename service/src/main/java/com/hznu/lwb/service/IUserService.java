@@ -1,5 +1,6 @@
 package com.hznu.lwb.service;
 
+import com.hznu.lwb.model.FollowKey;
 import com.hznu.lwb.model.User;
 import com.hznu.lwb.model.result.ApiResult;
 
@@ -17,4 +18,12 @@ public interface IUserService {
     ApiResult updatePersonalInfo(User user);
 
     ApiResult getUser(String userId);
+
+    ApiResult insertFollow(FollowKey followKey);
+
+    ApiResult deleteFollow(FollowKey followKey);
+
+    ApiResult selectFollowers(String noticer);
+
+    ApiResult selectNoticers(String follower);
 }

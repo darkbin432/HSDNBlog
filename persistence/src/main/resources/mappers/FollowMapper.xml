@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hznu.lwb.persistence.FollowDao">
+
+  <delete id="delete" parameterType="com.hznu.lwb.model.FollowKey">
+    delete from follow
+    where noticer = #{noticer,jdbcType=VARCHAR}
+      and follower = #{follower,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.hznu.lwb.model.FollowKey">
+    insert into follow (noticer, follower)
+    values (#{noticer,jdbcType=VARCHAR}, #{follower,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="selectFollowers" parameterType="string" resultType="string">
+    select follower
+    from follow
+    where noticer = #{noticer}
+  </select>
+
+  <select id="selectNoticers" parameterType="string" resultType="string">
+    select noticer
+    from follow
+    where follower = #{follower}
+  </select>
+
+</mapper>

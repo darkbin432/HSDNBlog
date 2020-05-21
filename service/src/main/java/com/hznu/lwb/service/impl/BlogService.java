@@ -8,8 +8,10 @@ import com.hznu.lwb.service.IBlogService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
+/**
+ * @author 斌
+ */
 @Service
 public class BlogService implements IBlogService {
 
@@ -67,8 +69,7 @@ public class BlogService implements IBlogService {
     public ApiResult selectByCondition(BlogParam blogParam) {
         ApiResult apiResult = new ApiResult();
         try {
-            List<Blog> blogList = blogDao.selectByCondition(blogParam);
-            apiResult.success(blogList);
+            apiResult.success(blogDao.selectByCondition(blogParam));
         }catch(Exception e){
             apiResult.fail("搜索博客失败");
         }
