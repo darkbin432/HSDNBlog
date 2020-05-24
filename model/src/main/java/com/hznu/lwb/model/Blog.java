@@ -39,6 +39,8 @@ public class Blog implements Serializable {
      */
     private String type;
 
+    private Integer praiseCount;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getBlogId() {
@@ -95,5 +97,13 @@ public class Blog implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Integer getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
     }
 }

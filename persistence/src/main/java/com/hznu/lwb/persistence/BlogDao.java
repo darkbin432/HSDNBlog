@@ -16,4 +16,6 @@ public interface BlogDao {
     List<Blog> selectByCondition(BlogParam blogParam);
 
     Integer updateByPrimaryKeySelective(Blog record);
+
+    List<Blog> selectMost3Praise(String type);
 }

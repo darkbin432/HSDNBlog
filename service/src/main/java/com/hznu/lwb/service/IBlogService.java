@@ -4,6 +4,8 @@ import com.hznu.lwb.model.Blog;
 import com.hznu.lwb.model.PraiseKey;
 import com.hznu.lwb.model.param.BlogParam;
 import com.hznu.lwb.model.result.ApiResult;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface IBlogService {
 
@@ -22,4 +24,6 @@ public interface IBlogService {
     ApiResult deletePraise(PraiseKey praiseKey);
 
     ApiResult countPraise(Integer blogId);
+
+    ApiResult selectMost3Praise(String type);
 }

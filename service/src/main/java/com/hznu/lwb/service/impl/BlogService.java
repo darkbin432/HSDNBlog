@@ -7,6 +7,8 @@ import com.hznu.lwb.model.result.ApiResult;
 import com.hznu.lwb.persistence.BlogDao;
 import com.hznu.lwb.persistence.PraiseDao;
 import com.hznu.lwb.service.IBlogService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,6 +18,8 @@ import javax.annotation.Resource;
  */
 @Service
 public class BlogService implements IBlogService {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     BlogDao blogDao;
@@ -74,6 +78,8 @@ public class BlogService implements IBlogService {
     public ApiResult selectByCondition(BlogParam blogParam) {
         ApiResult apiResult = new ApiResult();
         try {
+            blogParam.initOffset();
+
             apiResult.success(blogDao.selectByCondition(blogParam));
         }catch(Exception e){
             apiResult.fail("搜索博客失败");
@@ -113,6 +119,18 @@ public class BlogService implements IBlogService {
             apiResult.success();
         }catch(Exception e){
             apiResult.fail("获取点赞数失败");
+        }
+        return apiResult;
+    }
+
+    @Override
+    public ApiResult selectMost3Praise(String type) {
+        ApiResult apiResult = new ApiResult();
+        try {
+            apiResult.success(blogDao.selectMost3Praise(type));
+        }catch(Exception e){
+            logger.error(e.getMessage(), e);
+            apiResult.fail("获取获赞最高的3条博客失败");
         }
         return apiResult;
     }

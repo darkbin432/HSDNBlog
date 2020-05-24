@@ -8,6 +8,7 @@ import com.hznu.lwb.service.IBlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -75,6 +76,13 @@ public class BlogController {
     @ResponseBody
     public ApiResult countPraise(Integer blogId){
         ApiResult apiResult = blogService.countPraise(blogId);
+        return apiResult;
+    }
+
+    @RequestMapping(value = "/selectMost3Praise",method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResult selectMost3Praise(String type){
+        ApiResult apiResult = blogService.selectMost3Praise(type);
         return apiResult;
     }
 }

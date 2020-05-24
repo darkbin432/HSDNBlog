@@ -3,15 +3,20 @@
 <mapper namespace="com.hznu.lwb.persistence.BlogDao">
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.hznu.lwb.model.Blog">
-    select 
-    *
-    from blog
-    where blog_id = #{blogId,jdbcType=INTEGER}
+    select blog.*, user.nickname as user_name, case when cnt is null then 0 else cnt end as praise_count
+    from blog left join user on user.user_id = blog.user_id
+    left join (select blog.blog_id, count(praise.user_id) cnt
+    from blog left join praise on blog.blog_id = praise.blog_id
+    group by praise.blog_id) tmp on blog.blog_id = tmp.blog_id
+    where blog.blog_id = #{blogId,jdbcType=INTEGER}
   </select>
 
   <select id="selectByCondition" parameterType="com.hznu.lwb.model.param.BlogParam" resultType="com.hznu.lwb.model.Blog">
-    select blog.*, user.nickname as userName
+    select blog.*, user.nickname as user_name, case when cnt is null then 0 else cnt end as praise_count
     from blog left join user on user.user_id = blog.user_id
+    left join (select blog.blog_id, count(praise.user_id) cnt
+    from blog left join praise on blog.blog_id = praise.blog_id
+    group by praise.blog_id) tmp on blog.blog_id = tmp.blog_id
     <where>
       1 = 1
       <if test="userId != null">
@@ -21,10 +26,33 @@
         and title like concat('%',#{title},'%')
       </if>
       <if test="content != null">
-        and content = like concat('%',#{content},'%')
+        and content like concat('%',#{content},'%')
+      </if>
+      <if test="type != null">
+        and type = #{type}
       </if>
     </where>
     order by time desc
+    <if test="offset!=null and size!=null">
+      limit #{offset},#{size};
+    </if>
+  </select>
+
+  <select id="selectMost3Praise" parameterType="string" resultType="com.hznu.lwb.model.Blog">
+    select *, case when cnt is null then 0 else cnt end as praise_count
+    from (select blog.*, user.nickname as user_name
+    from blog left join user on blog.user_id = user.user_id) blog
+    left join (select blog.blog_id, count(praise.user_id) cnt
+    from blog left join praise on blog.blog_id = praise.blog_id
+    group by praise.blog_id) tmp on blog.blog_id = tmp.blog_id
+    <where>
+      1 = 1
+      <if test="_parameter != null">
+        and blog.type = #{type}
+      </if>
+    </where>
+    order by praise_count desc
+    limit 3
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
