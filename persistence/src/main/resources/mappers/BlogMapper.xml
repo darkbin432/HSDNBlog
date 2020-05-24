@@ -40,7 +40,8 @@
 
   <select id="selectMost3Praise" parameterType="string" resultType="com.hznu.lwb.model.Blog">
     select *, case when cnt is null then 0 else cnt end as praise_count
-    from (select blog.*, user.nickname as user_name
+    , case when char_length(content_before) > 100 then concat(left(content_before, 100), '......') else content_before end as content
+    from (select blog.blog_id, blog.user_id, blog.time, blog.title, blog.type, user.nickname as user_name, content as content_before
     from blog left join user on blog.user_id = user.user_id) blog
     left join (select blog.blog_id, count(praise.user_id) cnt
     from blog left join praise on blog.blog_id = praise.blog_id
