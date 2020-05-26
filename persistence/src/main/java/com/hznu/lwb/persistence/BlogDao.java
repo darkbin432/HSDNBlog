@@ -13,6 +13,8 @@ public interface BlogDao {
 
     Blog selectByPrimaryKey(Integer blogId);
 
+    Integer getTotalCount(BlogParam blogParam);
+
     List<Blog> selectByCondition(BlogParam blogParam);
 
     Integer updateByPrimaryKeySelective(Blog record);

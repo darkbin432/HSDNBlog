@@ -11,6 +11,29 @@
     where blog.blog_id = #{blogId,jdbcType=INTEGER}
   </select>
 
+  <select id="getTotalCount" parameterType="com.hznu.lwb.model.param.BlogParam" resultType="Integer">
+    select count(*)
+    from blog left join user on user.user_id = blog.user_id
+    left join (select blog.blog_id, count(praise.user_id) cnt
+    from blog left join praise on blog.blog_id = praise.blog_id
+    group by praise.blog_id) tmp on blog.blog_id = tmp.blog_id
+    <where>
+      1 = 1
+      <if test="userId != null">
+        and blog.user_id = #{userId}
+      </if>
+      <if test="title != null">
+        and title like concat('%',#{title},'%')
+      </if>
+      <if test="content != null">
+        and content like concat('%',#{content},'%')
+      </if>
+      <if test="type != null">
+        and blog.type = #{type}
+      </if>
+    </where>
+  </select>
+
   <select id="selectByCondition" parameterType="com.hznu.lwb.model.param.BlogParam" resultType="com.hznu.lwb.model.Blog">
     select blog.*, user.nickname as user_name, case when cnt is null then 0 else cnt end as praise_count
     from blog left join user on user.user_id = blog.user_id
@@ -29,7 +52,7 @@
         and content like concat('%',#{content},'%')
       </if>
       <if test="type != null">
-        and type = #{type}
+        and blog.type = #{type}
       </if>
     </where>
     order by time desc

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 斌
@@ -80,8 +81,13 @@ public class BlogService implements IBlogService {
         try {
             blogParam.initOffset();
 
-            apiResult.success(blogDao.selectByCondition(blogParam));
+            Integer totalCount = blogDao.getTotalCount(blogParam);
+            List<Blog> blogList = blogDao.selectByCondition(blogParam);
+
+            apiResult.setTotalCount(totalCount);
+            apiResult.success(blogList);
         }catch(Exception e){
+            logger.error(e.getMessage(), e);
             apiResult.fail("搜索博客失败");
         }
         return apiResult;
