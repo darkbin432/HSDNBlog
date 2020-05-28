@@ -1,6 +1,9 @@
 package com.hznu.lwb.persistence;
 
 import com.hznu.lwb.model.File;
+import com.hznu.lwb.model.UserDownloadFileKey;
+
+import java.util.List;
 
 public interface FileDao {
 
@@ -8,11 +11,11 @@ public interface FileDao {
 
     Integer insert(File record);
 
-    Integer insertSelective(File record);
-
     File selectByPrimaryKey(String filePath);
 
-    Integer updateByPrimaryKeySelective(File record);
+    List<File> selectByUploader(String uploaderId);
 
-    Integer updateByPrimaryKey(File record);
+    Integer insertRecord(UserDownloadFileKey userDownloadFileKey);
+
+    List<UserDownloadFileKey> selectRecord(String userId);
 }

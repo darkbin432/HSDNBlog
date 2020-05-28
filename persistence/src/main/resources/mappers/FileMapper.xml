@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hznu.lwb.persistence.FileDao">
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.hznu.lwb.model.File">
+    select *
+    from file
+    where file_name = #{fileName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByUploader" parameterType="string" resultType="com.hznu.lwb.model.File">
+    select *
+    from file
+    where uploader_id = #{uploaderId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from file
+    where file_name = #{fileName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hznu.lwb.model.File">
+    insert into file (file_name, uploader_id, real_name, description)
+    values (#{fileName,jdbcType=VARCHAR}, #{uploaderId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertRecord" parameterType="com.hznu.lwb.model.UserDownloadFileKey">
+    insert into user_download_file(user_id, file_name)
+    values(#{userId}, #{fileName})
+  </insert>
+
+  <select id="selectRecord" parameterType="string" resultType="com.hznu.lwb.model.UserDownloadFileKey">
+    select *
+    from user_download_file
+    where user_id = #{userId}
+  </select>
+</mapper>

@@ -14,7 +14,7 @@ public class UserDownloadFileKey implements Serializable {
     /**
      * 博客资源文件路径
      */
-    private String filePath;
+    private String fileName;
 
     private static final long serialVersionUID = 1L;
 
@@ -26,11 +26,11 @@ public class UserDownloadFileKey implements Serializable {
         this.userId = userId;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

@@ -30,6 +30,7 @@
 		<mapper resource="mappers/LetterMapper.xml"/>
 		<mapper resource="mappers/PraiseMapper.xml"/>
 		<mapper resource="mappers/NoticeMapper.xml"/>
+		<mapper resource="mappers/FileMapper.xml"/>
 	</mappers>
 
 

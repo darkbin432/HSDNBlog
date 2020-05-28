@@ -9,7 +9,11 @@ public class File implements Serializable {
     /**
      * 博客资源文件路径
      */
-    private String filePath;
+    private String fileName;
+
+    private String realName;
+
+    private String description;
 
     /**
      * 博客资源文件上传者ID
@@ -18,12 +22,12 @@ public class File implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public String getFilePath() {
-        return filePath;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getUploaderId() {
@@ -32,5 +36,21 @@ public class File implements Serializable {
 
     public void setUploaderId(String uploaderId) {
         this.uploaderId = uploaderId;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
