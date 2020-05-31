@@ -12,7 +12,7 @@ public interface LetterDao {
 
     Integer insert(Letter record);
 
-    List<User> selectRecipientBySender(String senderId);
+    List<User> selectUserId(String senderId);
 
     List<Letter> selectByBoth(LetterParam letterParam);
 }

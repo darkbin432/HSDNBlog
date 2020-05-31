@@ -43,10 +43,10 @@ public class LetterService implements ILetterService {
     }
 
     @Override
-    public ApiResult selectRecipientBySender(String senderId) {
+    public ApiResult selectUserId(String senderId) {
         ApiResult apiResult = new ApiResult();
         try {
-            apiResult.success(letterDao.selectRecipientBySender(senderId));
+            apiResult.success(letterDao.selectUserId(senderId));
         }catch(Exception e){
             apiResult.fail("获取私信失败");
         }

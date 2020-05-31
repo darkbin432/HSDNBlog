@@ -10,7 +10,7 @@ public interface ILetterService {
 
     ApiResult delete(Integer letterId);
 
-    ApiResult selectRecipientBySender(String senderId);
+    ApiResult selectUserId(String senderId);
 
     ApiResult selectByBoth(LetterParam letterParam);
 }

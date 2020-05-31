@@ -21,10 +21,10 @@ public class LetterController {
     @Resource
     private ILetterService letterService;
 
-    @RequestMapping(value = "/selectRecipientBySender",method = RequestMethod.GET)
+    @RequestMapping(value = "/selectLetterUserId",method = RequestMethod.GET)
     @ResponseBody
-    public ApiResult selectRecipientBySender(String senderId){
-        ApiResult apiResult = letterService.selectRecipientBySender(senderId);
+    public ApiResult selectUserId(String senderId){
+        ApiResult apiResult = letterService.selectUserId(senderId);
         return apiResult;
     }
 

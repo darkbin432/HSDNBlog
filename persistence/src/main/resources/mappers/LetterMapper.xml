@@ -2,11 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hznu.lwb.persistence.LetterDao">
 
-  <select id="selectRecipientBySender" parameterType="string" resultType="com.hznu.lwb.model.User">
-    select recipient_id, nickname
+  <select id="selectUserId" parameterType="string" resultType="com.hznu.lwb.model.User">
+    select distinct(tmp_id) as user_id, nickname
+    from (select distinct(recipient_id) as tmp_id, nickname
     from letter left join user on user.user_id = letter.recipient_id
-    where sender_id = #{senderId,jdbcType=VARCHAR}
-    order by time desc
+    where sender_id = #{senderId}
+    order by time desc) as tmp1
+    union
+    select distinct(tmp_id) as user_id, nickname from (select distinct(sender_id) as tmp_id, nickname
+    from letter left join user on user.user_id = letter.sender_id
+    where recipient_id = #{senderId}
+    order by time desc) as tmp2
   </select>
 
   <select id="selectByBoth" parameterType="com.hznu.lwb.model.param.LetterParam" resultType="com.hznu.lwb.model.Letter">
