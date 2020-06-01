@@ -13,13 +13,14 @@ public class FileType {
     public static final String UPLOAD_TYPE_IMAGE= "image";
     public static final String UPLOAD_TYPE_MAIL= "mail";
     public static final String UPLOAD_TYPE_PDF= "pdf";
+    public static final String UPLOAD_TYPE_OTHERS="others";
 
     public static final String PATH_IMAGE = "/images/";//图片
     public static final String PATH_VIDEO = "/videos/";//音频
     public static final String PATH_MAIL = "/mail-attachments/";//邮件
     public static final String PATH_COVER = "/coverphoto/";//头像
     public static final String PATH_PDF = "/pdfs/";//pdf
-    public static final String PATH_EXCEL = "/excels/";//excel
+    public static final String PATH_OTHERS = "/others/";//others
 
     public static final String JSON_FIRST_STRING = "{";
 

@@ -61,6 +61,9 @@ public class FileService {
                 case FileType.UPLOAD_TYPE_PDF:
                     uploadType=FileType.PATH_PDF;
                     break;
+                case FileType.UPLOAD_TYPE_OTHERS:
+                    uploadType=FileType.PATH_OTHERS;
+                    break;
                 default:
                     throw new Exception("上传类型未定义");
             }
