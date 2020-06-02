@@ -89,10 +89,10 @@ public class NoticeService implements INoticeService {
     }
 
     @Override
-    public ApiResult selectByUser(String userId) {
+    public ApiResult selectAll() {
         ApiResult apiResult = new ApiResult();
         try {
-            apiResult.success(noticeDao.selectByUser(userId));
+            apiResult.success(noticeDao.selectAll());
         }catch(Exception e){
             apiResult.fail("用户获取公告失败");
         }

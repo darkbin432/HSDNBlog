@@ -17,5 +17,5 @@ public interface INoticeService {
 
     ApiResult selectByAdmin(String userId);
 
-    ApiResult selectByUser(String userId);
+    ApiResult selectAll();
 }

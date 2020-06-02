@@ -19,7 +19,7 @@
     select
     *
     from letter
-    where recipient_id = #{recipientId} and sender_id = #{senderId}
+    where (recipient_id = #{recipientId} and sender_id = #{senderId}) or (recipient_id = #{senderId} and sender_id = #{recipientId})
     order by time asc
   </select>
 

@@ -35,10 +35,10 @@ public class NoticeController {
         return apiResult;
     }
 
-    @RequestMapping(value = "/selectNoticeByUser",method = RequestMethod.GET)
+    @RequestMapping(value = "/selectAllNotice",method = RequestMethod.GET)
     @ResponseBody
-    public ApiResult selectNoticeByUser(String userId){
-        ApiResult apiResult = noticeService.selectByUser(userId);
+    public ApiResult selectAllNotice(){
+        ApiResult apiResult = noticeService.selectAll();
         return apiResult;
     }
 

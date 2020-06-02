@@ -19,5 +19,5 @@ public interface NoticeDao {
 
     List<Notice> selectByAdmin(String userId);
 
-    List<Notice> selectByUser(String userId);
+    List<Notice> selectAll();
 }
