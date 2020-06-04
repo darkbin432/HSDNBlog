@@ -1,8 +1,7 @@
 package com.hznu.lwb.persistence;
 
-import java.util.List;
-
 import com.hznu.lwb.model.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {
 
@@ -10,13 +9,11 @@ public interface UserDao {
 
     Integer insert(User record);
 
-    Integer insertSelective(User record);
-
     User selectByPrimaryKey(String userId);
 
     Integer updateByPrimaryKeySelective(User record);
 
-    Integer updateByPrimaryKey(User record);
-
     User login(String userId);
+
+    String isUserIdUnique(@Param("userId")String userId);
 }

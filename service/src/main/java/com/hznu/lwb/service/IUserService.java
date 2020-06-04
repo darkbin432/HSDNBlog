@@ -19,6 +19,8 @@ public interface IUserService {
 
     ApiResult getUser(String userId);
 
+    ApiResult register(User user);
+
     ApiResult insertFollow(FollowKey followKey);
 
     ApiResult deleteFollow(FollowKey followKey);

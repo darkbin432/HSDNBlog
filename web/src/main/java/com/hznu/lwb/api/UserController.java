@@ -47,6 +47,13 @@ public class UserController extends ApplicationController {
         return apiResult;
     }
 
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @ResponseBody
+    public ApiResult register(User user) {
+        ApiResult apiResult = userService.register(user);
+        return apiResult;
+    }
+
     @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
     @ResponseBody
     public ApiResult getUserInfo(String userId){

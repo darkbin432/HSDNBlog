@@ -6,6 +6,7 @@ import com.hznu.lwb.model.result.ApiResult;
 import com.hznu.lwb.persistence.FollowDao;
 import com.hznu.lwb.persistence.UserDao;
 import com.hznu.lwb.service.IUserService;
+import com.hznu.utils.MD5Util;
 import org.springframework.stereotype.Service;
 
 
@@ -74,6 +75,28 @@ public class UserService implements IUserService {
             apiResult.success(userDao.selectByPrimaryKey(userId));
         }catch (Exception e){
             apiResult.fail();
+        }
+        return apiResult;
+    }
+
+    @Override
+    public ApiResult register(User user) {
+        ApiResult apiResult = new ApiResult();
+        try {
+            if (userDao.isUserIdUnique(user.getUserId()) != null){
+                apiResult.fail(444,"该用户名已存在");
+            }else{
+                if (user.getNickname() == null){
+                    user.setNickname(user.getUserId().substring(0, 1).toUpperCase() + user.getUserId().substring(1));
+                }
+                if (user.getPassword() != null){
+                    user.setPassword(MD5Util.md5Encrypt(user.getPassword()).toUpperCase());
+                }
+                userDao.insert(user);
+                apiResult.success();
+            }
+        }catch (Exception e){
+            apiResult.fail("新增用户失败");
         }
         return apiResult;
     }

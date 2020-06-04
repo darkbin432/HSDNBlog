@@ -24,7 +24,7 @@ public class User implements Serializable {
     /**
      * 性别
      */
-    private Integer sex;
+    private Boolean sex;
 
     /**
      * 手机号码
@@ -67,11 +67,11 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public Integer getSex() {
+    public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(Boolean sex) {
         this.sex = sex;
     }
 
