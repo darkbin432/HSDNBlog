@@ -14,7 +14,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <poi.version>3.14</poi.version>
+        <poi.version>4.1.1</poi.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
